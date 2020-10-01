@@ -1,4 +1,4 @@
-from prometheus_client import start_http_server, Gauge
+from prometheus_client import start_http_server, Gauge, Info
 import yaml
 import urllib.request
 import re
@@ -6,7 +6,8 @@ import os
 import time
 
 # Create a metric to track versions.
-VERSION = Gauge('external_service_version', 'Current version of an external service', ['name', 'version'])
+VERSION_VALUE = Gauge('external_service_version_value', 'Current version value of an external service', ['name'])
+VERSION_INFO = Info('external_service_version_info', 'Current version info of an external service', ['name'])
 
 if __name__ == '__main__':
     exponential_factor = os.getenv('EXPONENTIAL_FACTOR', 100000)
@@ -42,7 +43,8 @@ if __name__ == '__main__':
 
                     # print(
                     #     'Scraped %s with version %s and version value is %.2f' % (service_name, version, version_value))
-                    VERSION.labels(service_name, version).set(version_value)
+                    VERSION_VALUE.labels(service_name).set(version_value)
+                    VERSION_INFO.labels(service_name).info({'version': version})
             except yaml.YAMLError as exc:
                 print("Error, can not parse config.yml file: %s" % exc)
 
