@@ -1,0 +1,7 @@
+services:
+  shopee:
+    url: http://shopee.vn
+    regex: '[0-9]+\.[0-9]+\.[0-9]'
+  sendo:
+    url: http://sendo.vn
+    regex: '[0-9]+\.([0-9]+\.[0-9])'
