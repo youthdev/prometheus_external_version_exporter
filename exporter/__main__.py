@@ -31,7 +31,14 @@ if __name__ == '__main__':
 
                     version_value = 0
                     for idx, part in enumerate(reversed(version.split('.'))):
-                        version_value += int(part) % exponential_factor * pow(exponential_factor, idx)
+                        # Try to part the version to int, if not, treat it as zero
+                        part_int = 0
+                        try:
+                            part_int = int(part)
+                        except ValueError:
+                            print('Can not parse part %d of version of %s because it is not a number, '
+                                  'which currently is: %s' % (idx + 1, service_name, version))
+                        version_value += part_int % exponential_factor * pow(exponential_factor, idx)
 
                     # print(
                     #     'Scraped %s with version %s and version value is %.2f' % (service_name, version, version_value))
