@@ -1,7 +1,10 @@
 services:
-  shopee:
-    url: http://shopee.vn
-    regex: '[0-9]+\.[0-9]+\.[0-9]'
-  sendo:
-    url: http://sendo.vn
-    regex: '[0-9]+\.([0-9]+\.[0-9])'
+  shopee_seller:
+    url: https://banhang.shopee.vn
+    regex: 'sellerCenterFeVersion="(.*?)"'
+  shopee_uat_seller:
+    url: https://banhang.uat.shopee.vn/
+    regex: 'sellerCenterFeVersion="(.*?)"'
+  ghtk:
+    url: https://docs.giaohangtietkiem.vn
+    regex: 'v[0-9]+\.[0-9]+\.[0-9]'
